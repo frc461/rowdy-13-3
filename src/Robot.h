@@ -14,6 +14,7 @@ public:
 
 	// Other Jaguar definitions
 	Jaguar turret;
+	Jaguar kickup_wheel;
 	Jaguar fire_wheel;
 	Jaguar intake;
 

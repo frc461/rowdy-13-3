@@ -13,6 +13,7 @@ Robot::Robot():
 	myRobot(front_left_drive, back_left_drive, front_right_drive, back_right_drive),
 
 	turret(trt),
+	kickup_wheel(kw),
 	fire_wheel(fw),
 	intake(i),
 
@@ -23,7 +24,7 @@ Robot::Robot():
 	control_stick_a(cs_a),
 	control_stick_b(cs_b)
 {
-
+	timer_on = false;
 }
 
 double Robot::nullify(double n) {
@@ -80,8 +81,23 @@ void Robot::TeleopPeriodic()
 
 	if(joystick_0.GetRawButton(0)) {
 
-	}else {
+		if(!timer_on) {
+			t.Reset();
+			t.Start();
+			timer_on = true;
+		}
 
+		if(t.Get() < 5.0) {
+			fire_wheel.Set(1.0); //Need to check this.
+		} else {
+			fire_wheel.Set(0.0);
+			kickup_wheel.Set(0.5); //Need to check this.
+		}
+
+	} else {
+		fire_wheel.Set(0.0);
+		kickup_wheel.Set(0.0);
+		timer_on = false;
 	}
 
 	myRobot.TankDrive(l_y, r_y, false);
