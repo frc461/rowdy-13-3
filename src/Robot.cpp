@@ -95,6 +95,7 @@ void Robot::TeleopPeriodic()
 		}
 
 	} else {
+		t.Stop();
 		fire_wheel.Set(0.0);
 		kickup_wheel.Set(0.0);
 		timer_on = false;
