@@ -13,6 +13,7 @@ Robot::Robot():
 	myRobot(front_left_drive, back_left_drive, front_right_drive, back_right_drive),
 
 	turret(trt),
+	kickup_wheel(kw),
 	fire_wheel(fw),
 	conveyor(cnv),
 
@@ -26,7 +27,7 @@ Robot::Robot():
 //	control_stick_a(cs_a),
 //	control_stick_b(cs_b)
 {
-
+	timer_on = false;
 }
 
 double Robot::nullify(double n) {
