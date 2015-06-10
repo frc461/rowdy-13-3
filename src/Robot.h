@@ -15,7 +15,11 @@ public:
 	// Other Jaguar definitions
 	Jaguar turret;
 	Jaguar fire_wheel;
-	Jaguar intake;
+	Jaguar conveyor;
+
+	//Spikes
+	Relay intake;
+	Relay kickup;
 
 	// Drive train definitions
 	RobotDrive myRobot;
@@ -23,8 +27,8 @@ public:
 	// Joystick definitions
 	Joystick joystick_0;
 	Joystick joystick_1;
-	Joystick control_stick_a;
-	Joystick control_stick_b;
+	//Joystick control_stick_a;
+	//Joystick control_stick_b;
 
 	Timer t;
 
@@ -36,21 +40,30 @@ private:
 
 	enum sticks {
 		js_0 = 0,
-		js_1 = 1,
-		cs_a = 2,
-		cs_b = 3
+		js_1 = 1
 	};
 
 	enum p_w_m {
-		fld=0,
-		bld=1,
-		frd=2,
-		brd=3,
-		fw=4,
-		trt=6,
-		kw=8,
-		i=9
+		fld=0, //Front left drive
+		bld=1, //Back left drive
+		frd=2, //Front right drive
+		brd=3, //Back right drive
 
+		fw=4, //Fire wheel
+		trt=6, //Turret
+
+		cnv=7 //Conveyor
+	};
+
+	enum relay {
+		kw = 0, //Kickup wheel
+		i = 1 //Intake
+	};
+
+	//buttons start at 1, NOT 0
+	enum button {
+		conveyorButton=1, //A
+		fire=6 //Right bumper
 	};
 
 	LiveWindow *lw;

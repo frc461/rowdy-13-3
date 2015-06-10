@@ -14,14 +14,17 @@ Robot::Robot():
 
 	turret(trt),
 	fire_wheel(fw),
-	intake(i),
+	conveyor(cnv),
+
+	intake(i, Relay::kForwardOnly),
+	kickup(kw, Relay::kForwardOnly),
 
 	t(),
 
 	joystick_0(js_0),
-	joystick_1(js_1),
-	control_stick_a(cs_a),
-	control_stick_b(cs_b)
+	joystick_1(js_1)
+//	control_stick_a(cs_a),
+//	control_stick_b(cs_b)
 {
 
 }
@@ -78,14 +81,26 @@ void Robot::TeleopPeriodic()
 		turret.Set(0.0);
 	}
 
-	if(joystick_0.GetRawButton(0)) {
+	//Fire is negative direction
+	if (joystick_0.GetRawButton(fire)) {
+		fire_wheel.Set(-0.75);
+		kickup.Set(Relay::kOn);
+	}
+	else {
+		fire_wheel.Set(0.0);
+		kickup.Set(Relay::kOff);
+	}
 
-	}else {
-
+	if (joystick_0.GetRawButton(conveyorButton)) {
+		conveyor.Set(0.5);
+		intake.Set(Relay::kOn);
+	}
+	else {
+		conveyor.Set(0.0);
+		intake.Set(Relay::kOff);
 	}
 
 	myRobot.TankDrive(l_y, r_y, false);
-
 }
 
 // Test methods
